@@ -1,3 +1,3 @@
 # scripts
 
-* [Celestia](/celestia.zip)
+* [Celestia](/celestia/README.md)
