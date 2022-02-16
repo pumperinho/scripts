@@ -111,6 +111,5 @@ EOF
 
 sudo systemctl enable celestia-appd
 sudo systemctl daemon-reload
-sudo systemctl restart celestia-appd && journalctl -u celestia-appd.service -f
-
-# Press CTRL+C to interrupt logs output
+sudo systemctl restart celestia-appd 
+source .bash_profile
