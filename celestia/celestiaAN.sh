@@ -43,7 +43,7 @@ if [ -z ${CELESTIA_WALLET} ]; then
         echo 'export CELESTIA_WALLET='$CELESTIA_WALLET >> $HOME/.bash_profile
 fi
 
-if [ -z {CELESTIA_CHAIN} ]; then
+if [ -z ${CELESTIA_CHAIN} ]; then
         CELESTIA_CHAIN="devnet-2"
         echo 'export CELESTIA_CHAIN='$CELESTIA_CHAIN >> $HOME/.bash_profile
 
