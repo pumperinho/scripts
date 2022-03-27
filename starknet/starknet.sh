@@ -7,9 +7,9 @@ sudo apt install -y python3-pip
 
 sudo apt install -y build-essential libssl-dev libffi-dev python3-dev
 
-sudo apt-get install libgmp-dev
+sudo apt-get install libgmp-dev -y
 
-pip3 install fastecdsa
+pip3 install fastecdsa -y
 
 sudo apt-get install -y pkg-config
 
@@ -21,11 +21,11 @@ sudo apt install cargo -y
 
 source $HOME/.cargo/env
 
-rustup update stable
+rustup update stable -y
 
 apt install git -y
 
-git clone --branch v0.1.6-alpha https://github.com/eqlabs/pathfinder.git
+git clone --branch v0.1.5-alpha https://github.com/eqlabs/pathfinder.git
 
 sudo apt install python3.8-venv
 
