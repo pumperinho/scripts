@@ -21,7 +21,7 @@ sudo apt install cargo -y
 
 source $HOME/.cargo/env
 
-rustup update stable -y
+rustup update stable
 
 apt install git -y
 
