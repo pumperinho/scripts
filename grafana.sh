@@ -1,4 +1,3 @@
-root@vmi824974:~# cat monitor.sh 
 #!/bin/bash
 cd $HOME
 if [ ! $OWNER ]; then
