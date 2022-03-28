@@ -6,9 +6,11 @@ fi
 echo 'Владелец: ' $OWNER
 sleep 1
 echo 'export OWNER='$OWNER >> $HOME/.profile
-echo 'Название вашего сервера: ' $(wget -qO- eth0.me)
+
+IP = $(wget -qO- eth0.me)
+echo 'Название вашего сервера: ' $IP
 sleep 1
-echo 'export HOSTNAME='$HOSTNAME >> $HOME/.profile
+echo 'export IP='$IP >> $HOME/.bash_profile
 
 sudo systemctl stop prometheus && systemctl disable prometheus
 
@@ -25,7 +27,7 @@ global:
   evaluation_interval: 30s
   external_labels:
     owner: '$OWNER'
-    hostname: '$HOSTNAME'
+    hostname: '$IP'
 scrape_configs:
   - job_name: "node_exporter"
     scrape_interval: 30s
@@ -35,7 +37,7 @@ scrape_configs:
       - source_labels: [__address__]
         regex: '.*'
         target_label: instance
-        replacement: '$HOSTNAME'
+        replacement: '$IP'
 EOF
 
 sudo tee <<EOF >/dev/null /etc/systemd/system/vmagent.service
