@@ -15,7 +15,7 @@ sudo apt-get install -y pkg-config
 
 apt install curl -y
 
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -y
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 sudo apt install cargo -y
 
