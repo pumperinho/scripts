@@ -1,3 +1,4 @@
+root@vmi824974:~# cat monitor.sh 
 #!/bin/bash
 cd $HOME
 if [ ! $OWNER ]; then
@@ -6,11 +7,10 @@ fi
 echo 'Владелец: ' $OWNER
 sleep 1
 echo 'export OWNER='$OWNER >> $HOME/.profile
-
-IP = $(wget -qO- eth0.me)
-echo 'Название вашего сервера: ' $IP
+HOSTNAME=$(wget -qO- eth0.me)
+echo 'Название вашего сервера: ' $HOSTNAME
 sleep 1
-echo 'export IP='$IP >> $HOME/.bash_profile
+echo 'export HOSTNAME='$HOSTNAME >> $HOME/.profile
 
 sudo systemctl stop prometheus && systemctl disable prometheus
 
@@ -27,7 +27,7 @@ global:
   evaluation_interval: 30s
   external_labels:
     owner: '$OWNER'
-    hostname: '$IP'
+    hostname: '$HOSTNAME'
 scrape_configs:
   - job_name: "node_exporter"
     scrape_interval: 30s
@@ -37,7 +37,7 @@ scrape_configs:
       - source_labels: [__address__]
         regex: '.*'
         target_label: instance
-        replacement: '$IP'
+        replacement: '$HOSTNAME'
 EOF
 
 sudo tee <<EOF >/dev/null /etc/systemd/system/vmagent.service
@@ -77,5 +77,67 @@ WantedBy=multi-user.target
 EOF
 
 sudo systemctl daemon-reload && sudo systemctl enable node_exporter && sudo systemctl restart node_exporter
+
+echo "Monitoring Installed"
+root@vmi824974:~# cat /etc/prometheus/prometheus.yml
+global:
+  scrape_interval: 30s
+  evaluation_interval: 30s
+  external_labels:
+    owner: 'pumperinho'
+    hostname: '209.126.81.168'
+scrape_configs:
+  - job_name: "node_exporter"
+    scrape_interval: 30s
+    static_configs:
+      - targets: ["localhost:9100"]
+    relabel_configs:
+      - source_labels: [__address__]
+        regex: '.*'
+        target_label: instance
+        replacement: '209.126.81.168'
+root@vmi824974:~# nano monitor.sh 
+
+  GNU nano 4.8                           monitor.sh                                     
+        replacement: '$HOSTNAME'
+EOF
+
+sudo tee <<EOF >/dev/null /etc/systemd/system/vmagent.service
+[Unit]
+  Description=vmagent Monitoring
+  Wants=network-online.target
+  After=network-online.target
+[Service]
+  User=$USER
+  Type=simple
+  ExecStart=$HOME/vmagent-prod \
+  -promscrape.config=/etc/prometheus/prometheus.yml \
+  -remoteWrite.url=http://doubletop:doubletop@vm.razumv.tech:8080/api/v1/write
+  ExecReload=/bin/kill -HUP $MAINPID
+[Install]
+  WantedBy=multi-user.target
+EOF
+
+sudo systemctl daemon-reload && sudo systemctl enable vmagent && sudo systemctl restart>
+
+wget https://github.com/prometheus/node_exporter/releases/download/v1.1.2/node_exporter>
+tar xvf node_exporter-1.1.2.linux-amd64.tar.gz
+sudo cp node_exporter-1.1.2.linux-amd64/node_exporter /usr/local/bin
+rm -rf node_exporter-1.1.2.linux-amd64*
+
+sudo tee <<EOF >/dev/null /etc/systemd/system/node_exporter.service
+[Unit]
+Description=Node Exporter
+Wants=network-online.target
+After=network-online.target
+[Service]
+User=$USER
+Type=simple
+ExecStart=/usr/local/bin/node_exporter --web.listen-address=":9100"
+[Install]
+WantedBy=multi-user.target
+EOF
+
+sudo systemctl daemon-reload && sudo systemctl enable node_exporter && sudo systemctl r>
 
 echo "Monitoring Installed"
