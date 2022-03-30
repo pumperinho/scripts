@@ -61,8 +61,13 @@ sed -i -e "s/^pruning-interval *=.*/pruning-interval = \"$pruning_interval\"/" $
 # reset
 archwayd unsafe-reset-all
 
+archwayd config chain-id $ARCHWAY_CHAIN
+archwayd config keyring-backend test
 # create keys
-archwayd keys add $ARCHWAY_WALLET &> "mnemonic.txt"
+
+cd $HOME
+
+archwayd keys add $ARCHWAY_WALLET | tee "mnemonic.txt"
 
 # SAVE MNEMONIC FROM OUTPUT !!
 
