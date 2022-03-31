@@ -68,7 +68,7 @@ archwayd config keyring-backend test
 
 cd $HOME
 
-archwayd keys add $ARCHWAY_WALLET | tee "mnemonic.txt"
+archwayd keys add $ARCHWAY_WALLET &> "mnemonic.txt"
 
 # SAVE MNEMONIC FROM OUTPUT !!
 
