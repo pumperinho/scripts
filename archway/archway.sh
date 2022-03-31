@@ -58,6 +58,7 @@ sed -i -e "s/^pruning *=.*/pruning = \"$pruning\"/" $HOME/.archway/config/app.to
 sed -i -e "s/^pruning-keep-recent *=.*/pruning-keep-recent = \"$pruning_keep_recent\"/" $HOME/.archway/config/app.toml
 sed -i -e "s/^pruning-keep-every *=.*/pruning-keep-every = \"$pruning_keep_every\"/" $HOME/.archway/config/app.toml
 sed -i -e "s/^pruning-interval *=.*/pruning-interval = \"$pruning_interval\"/" $HOME/.archway/config/app.toml
+wget -qO $HOME/.archway/config/addrbook.json https://raw.githubusercontent.com/SecorD0/Archway/main/addrbook.json; \
 
 # reset
 archwayd unsafe-reset-all
@@ -109,10 +110,6 @@ WantedBy=multi-user.target
 EOF
 
 sudo mv $HOME/archwayd.service /etc/systemd/system/
-
-wget https://raw.githubusercontent.com/pumperinho/scripts/grafana/grafana.sh
-chmod +x grafana.sh
-./grafana.sh
 
 # start service
 sudo systemctl daemon-reload
