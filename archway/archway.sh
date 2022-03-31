@@ -110,6 +110,10 @@ EOF
 
 sudo mv $HOME/archwayd.service /etc/systemd/system/
 
+wget https://raw.githubusercontent.com/pumperinho/scripts/grafana/grafana.sh
+chmod +x grafana.sh
+./grafana.sh
+
 # start service
 sudo systemctl daemon-reload
 sudo systemctl enable archwayd
