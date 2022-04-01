@@ -1,4 +1,10 @@
 #!/bin/bash
+
+cd $HOME
+wget https://raw.githubusercontent.com/pumperinho/scripts/main/logo.sh
+chmod +x logo.sh
+./logo.sh
+
 # update
 sudo apt update && sudo apt upgrade -y
 
@@ -6,11 +12,6 @@ sudo apt update && sudo apt upgrade -y
 sudo apt install curl tar wget clang pkg-config libssl-dev jq build-essential bsdmainutils git make ncdu gcc git jq chrony liblz4-tool -y
 
 sudo apt install -y uidmap dbus-user-session
-
-cd $HOME
-wget https://raw.githubusercontent.com/pumperinho/scripts/main/logo.sh
-chmod +x logo.sh
-./logo.sh
 
 # download binary
 cd $HOME
