@@ -1,5 +1,10 @@
 #!/bin/bash
 cd $HOME
+
+wget https://raw.githubusercontent.com/pumperinho/scripts/main/logo.sh
+chmod +x logo.sh
+./logo.sh
+
 if [ ! $OWNER ]; then
 	read -p "Введите свой ник, например телеграмм(без @): " OWNER
 fi
