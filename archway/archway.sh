@@ -7,6 +7,11 @@ sudo apt install curl tar wget clang pkg-config libssl-dev jq build-essential bs
 
 sudo apt install -y uidmap dbus-user-session
 
+cd $HOME
+wget https://raw.githubusercontent.com/pumperinho/scripts/main/logo.sh
+chmod +x logo.sh
+./logo.sh
+
 # download binary
 cd $HOME
 mkdir archway && cd archway
