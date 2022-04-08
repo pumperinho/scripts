@@ -19,13 +19,17 @@ sudo apt install build-essential jq wget git -y
 wget https://dl.google.com/go/go1.17.1.linux-amd64.tar.gz
 tar -xvf go1.17.1.linux-amd64.tar.gz
 sudo mv go /usr/local
-Now add go to your bashrc -
+
+GOPATH=$HOME/go
+GOROOT=/usr/local/go
+GOBIN=$GOPATH/bin
+PATH=$PATH:/usr/local/go/bin:$GOBIN
 
 echo "" >> ~/.bashrc
-echo 'export GOPATH=$HOME/go' >> ~/.bashrc
-echo 'export GOROOT=/usr/local/go' >> ~/.bashrc
-echo 'export GOBIN=$GOPATH/bin' >> ~/.bashrc
-echo 'export PATH=$PATH:/usr/local/go/bin:$GOBIN' >> ~/.bashrc
+echo 'export GOPATH='${GOPATH} >> ~/.bashrc
+echo 'export GOROOT='${GOROOT} >> ~/.bashrc
+echo 'export GOBIN='${GOBIN} >> ~/.bashrc
+echo 'export PATH='${PATH} >> ~/.bashrc
 
 source ~/.bashrc
 
@@ -55,7 +59,7 @@ source $HOME/.bash_profile
 cohod init ${COSMIC_MONIKER} --chain-id ${COSMIC_CHAIN}
 cohod config chain-id $COSMIC_CHAIN
 
-archwayd unsafe-reset-all
+cohod unsafe-reset-all
 
 cohod config chain-id ${COSMIC_CHAIN}
 cohod config keyring-backend test
