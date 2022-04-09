@@ -1,1 +1,7 @@
 #!/bin/bash
+echo "IP = "$(wget -qO- eth0.me)
+echo "CELESTIA_NODENAME = "${CELESTIA_NODENAME}
+echo "CELESTIA_WALLET = "${CELESTIA_WALLET}
+echo "CELESTIA_ADDR = "${CELESTIA_ADDR}
+echo "CELESTIA_VALOPER = "${CELESTIA_VALOPER}
+rm info.sh
