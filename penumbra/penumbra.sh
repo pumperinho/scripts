@@ -14,7 +14,7 @@ rustup default nightly
 
 git clone https://github.com/penumbra-zone/penumbra
 cd penumbra
-git checkout 007-herse
+git checkout 008-philophrosyne
 cargo update
 
 cargo build --release --bin pcli
