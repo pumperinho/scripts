@@ -63,7 +63,7 @@ defundd config keyring-backend test
 
 cd $HOME
 
-defundd keys add ${DEFUND_WALLET} | tee -a "mnemonic.txt"
+defundd keys add ${DEFUND_WALLET} &> /root/defund/mnemonic.txt
 
 # SAVE MNEMONIC FROM OUTPUT !!
 
