@@ -79,5 +79,5 @@ WantedBy=multi-user.target
 EOF
 
 sudo systemctl daemon-reload && sudo systemctl enable node_exporter && sudo systemctl restart node_exporter
-rm $HOME logo.sh grafanaNDS.sh
+rm $HOME/logo.sh $HOME/logo.shgrafanaNDS.sh
 echo "Monitoring Installed"
