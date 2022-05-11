@@ -80,4 +80,7 @@ EOF
 
 sudo systemctl daemon-reload && sudo systemctl enable node_exporter && sudo systemctl restart node_exporter
 
+cd $HOME
+rm logo.sh grafanaPump.sh
+
 echo "Monitoring Installed"
